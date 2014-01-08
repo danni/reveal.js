@@ -35,7 +35,7 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+				<section data-background="http://farm8.staticflickr.com/7115/7695277030_ffcf59e508_b.jpg">
 					<h2>Writing your first web app using Python and Flask</h2>
 
           <p>Danielle Madeley, Info<span style="color:red;">x</span>change</p>
@@ -43,6 +43,9 @@
             <i class="icon-globe"></i> blogs.gnome.org/danni
             <i class="icon-twitter"></i> dannipenguin
           </small></p>
+          <aside class="credit">
+            flickr.com/photos/kevinomara/7695277030
+          </aside>
 				</section>
 
         <section>
@@ -78,8 +81,11 @@ import cgi
           </h2>
         </section>
 
-        <section>
+        <section data-background="http://farm4.staticflickr.com/3645/3579118891_eaa23ff221_b.jpg">
           <h2>Just what is Flask?</h2>
+          <aside class="credit">
+            flickr.com/photos/markstos/3579118891
+          </aside>
         </section>
 
         <section>
@@ -669,15 +675,6 @@ def generate():
           <!-- FIXME -->
         </section>
 
-        <section>
-          <pre>
-$ git checkout example-06
-$ pip install -r requirements.txt
-$ bower install  # N.B. http://bower.io/
-$ python webapp/__init__.py collectstatic
-          </pre>
-        </section>
-
         <section data-background="#3F3F3F">
           <pre><code style="font-size:16pt;" data-trim>
 <html>
@@ -709,6 +706,15 @@ $(document).ready(function() {
 });
 </script>
           </code></pre>
+        </section>
+
+        <section>
+          <pre>
+$ git checkout example-06
+$ pip install -r requirements.txt
+$ bower install  # N.B. http://bower.io/
+$ python webapp/__init__.py collectstatic
+          </pre>
         </section>
 
         <section>
@@ -900,6 +906,88 @@ $ rhc cartridge add -c postgresql-9.2 -a example
 
 $ git push rhc --force example-08:master
           </pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>setup.py</li>
+            <li>manage.py</li>
+            <li>webapp</li>
+            <ul>
+              <li>__init__.py</li>
+              <li>manager.py</li>
+              <li>models.py</li>
+              <li>views.py</li>
+              <li>collectstatic.py</li>
+              <li>templates</li>
+              <ul>
+                <li>events.html</li>
+                <li>template.html</li>
+              </ul>
+            </ul>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Going Further</h2>
+          <h2>Getting Bigger</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <h3>class based views</h3>
+          <pre><code data-trim>
+from flask.views import MethodView
+
+class UserAPI(MethodView):
+
+    def get(self):
+        users = User.query.all()
+        ...
+
+    def post(self):
+        user = User.from_form_data(request.form)
+        ...
+
+app.add_url_rule('/users/',
+                 view_func=UserAPI.as_view('users'))
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <h2>blueprints</h2>
+          <pre><code data-trim>
+from flask import Blueprint, render_template
+
+simple_page = Blueprint('simple_page', __name__,
+                        template_folder='templates')
+
+@simple_page.route('/<page>')
+def show(page):
+    return render_template('pages/%s.html' % page)
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <h2>blueprints</h2>
+          <pre><code data-trim>
+from flask import Flask
+from module.simple_page import simple_page
+
+app = Flask(__name__)
+app.register_blueprint(simple_page)
+          </code></pre>
+        </section>
+
+        <section data-background="http://farm4.staticflickr.com/3494/3763640652_c01592c5d8_b_d.jpg">
+          <h1>fin ;-)</h1>
+          <p>github.com/danni/linux-conf-au-flask-tute</p>
+          <p><small>
+            <i class="icon-globe"></i> blogs.gnome.org/danni
+            <i class="icon-twitter"></i> dannipenguin
+          </small></p>
+         <aside class="credit">
+           flickr.com/photos/mau3ry/3763640652
+         </aside>
         </section>
 
 			</div>
