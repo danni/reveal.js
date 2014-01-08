@@ -4,8 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>more than a side salad:
-    behaviour driven testing and test driven design in Django with Lettuce</title>
+		<title>Writing your first web app using Python and Flask</title>
 
 		<meta name="author" content="Danielle Madeley">
 
@@ -37,11 +36,9 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>more than a side salad:</h1>
-          <h3>behaviour driven testing and test driven design in Django with
-            Lettuce</h3>
+					<h2>Writing your first web app using Python and Flask</h2>
 
-          <p>Danielle Madeley</p>
+          <p>Danielle Madeley, Info<span style="color:red;">x</span>change</p>
           <p><small>
             <i class="icon-globe"></i> blogs.gnome.org/danni
             <i class="icon-twitter"></i> dannipenguin
@@ -49,506 +46,861 @@
 				</section>
 
         <section>
-          <h1>Just what is test driven development?</h1>
-        </section>
-
-        <section>
-          <img src="http://www.troll.me/images/winter-is-coming/brace-yourselves-testing-is-coming.jpg"/>
-        </section>
-
-        <section>
-          <h1>Tests first; code second</h1>
-
-          <aside class="notes">
-            <p>
-              Software development methodolgy where we write the tests first.
-            </p>
-            <p>
-              Once we have tests, we can write code that makes the tests
-              pass.
-            </p>
-          </aside>
-        </section>
-
-        <section data-background="white">
-          <img src="http://wellington.pm.org/archive/200606/tdd/images/tdd_cycle.jpg"/>
-
-          <aside class="credit bg-dark">
-            http://www.nilkanth.com/2007/06/08/three-monkeys-of-test-driven-development/
-          </aside>
-          <aside class="notes">
-            <p>
-              Tests first, code second.
-            </p>
-            <p>
-              Important both for bug fixing (write a test that demonstrates
-              regression and then fix it) AND feature development.
-            </p>
-          </aside>
-        </section>
-
-        <section>
-          <h2>But how do we write tests when we don't know what the code
-            looks like?</h2>
-
-          <aside class="notes">
-            <p>It's very hard to write unit tests when you don't know what
-            it is that you're testing yet</p>
-          </aside>
-        </section>
-
-        <section>
-          <h1>Don't test code; test behaviours</h1>
-        </section>
-
-        <section data-background="http://i.imgur.com/QpZe0LD.jpg">
-        </section>
-
-        <section>
-          <div class="story">
-          <p><em>As a</em> visitor to the site</p>
-          <p><em>I want</em> to create an account using my Google login</p>
-          <p><em>So that</em> I can log in without needing another password</p>
-          </div>
-        </section>
-
-        <section
-          data-background="http://farm4.staticflickr.com/3184/2660160225_bf77317442_b_d.jpg"
-          class="bg-dark">
-
-          <h2>Given</h2>
-          <p class="story fragment fade-in expand" data-fragment-index="2">
-            I have a valid Google account
+          <h3>If you haven't already...</h3>
+          <p style="font-size:32pt;">
+            git clone<br/>
+            git://github.com/danni/linux-conf-au-flask-tute
           </p>
-          <h2>When</h2>
-          <p class="story fragment fade-in expand" data-fragment-index="3">
-            I visit the site
+          <p style="padding-top:1em;">
+            Follow the README to set up your environment
           </p>
-          <p class="story fragment fade-in expand" data-fragment-index="4">
-            And I click create account
-          </p>
-          <h2>Then</h2>
-          <p class="story fragment fade-in expand" data-fragment-index="5">
-            I am redirected to Google
-          </p>
-
-          <aside class="credit">
-            http://www.flickr.com/photos/27369469@N08/2660160225
-          </aside>
-
-          <aside class="notes">
-            <p>3 verbs: given, when and then</p>
-            <p>Given sets up the state for testing something</p>
-            <p>When says what we do</p>
-            <p>Then tests what the output is</p>
-            <p>This is neat because (a) it describes the test</p>
-            <p>And (b) it is readable by non-programmers</p>
-            <p>This forms the basis of Gherkin syntax as used by cucumber</p>
-          </aside>
         </section>
 
-        <section
-          data-background="http://farm4.staticflickr.com/3285/2742564457_ce2995fcc1_b_d.jpg"
-          class="bg-dark">
-          <h1>Lettuce</h1>
-          <h3>http://lettuce.it</h3>
-          <aside class="credit">
-            http://www.flickr.com/photos/65567316@N00/2742564457
-          </aside>
-
-          <aside class="notes">
-            <p>Lettuce is a cucumber implementation in Python</p>
-            <p>Similar tools are behave and Freshen</p>
-          </aside>
+        <section>
+          <ul>
+            <li>What is Flask and why would you use it</li>
+            <li>Rendering your first response</li>
+            <li>Handling forms and POST data</li>
+            <li>Using SQLAlchemy</li>
+            <li>Writing your first RESTful API</li>
+            <li>Holding open a connection to emit updates</li>
+            <li>Testing your app with py.test</li>
+            <li>Deploying to Redhat's Openshift platform</li>
+          </ul>
         </section>
 
-        <section data-background="#3F3F3F">
-          <pre><code data-trim class="gherkin_en">
-Feature: Authenticate to API
-
-  As a searcher/API user
-  I want to authenticate to the API
-  So that I can make queries
-
-  Scenario: I am not authenticated to the API
-    When I get the resource "/api/v3/hello/"
-
-    Then I get the response code 401
-          </code></pre>
-
-          <aside class="notes">
-            <p>These are called feature files. A feature is made up of
-            scenarios</p>
-          </aside>
+        <section>
+          <pre style="font-size:40pt;">
+import cgi
+          </pre>
+          <h2 class="fragment fade-in expand" data-fragment-index="2">
+            Just kidding!
+          </h2>
         </section>
 
-        <section data-background="#486082">
-          <img src="http://i.imgur.com/Z3tULgQ.jpg"/>
+        <section>
+          <h2>Just what is Flask?</h2>
         </section>
 
-        <section
-          data-background="http://farm1.staticflickr.com/218/504844510_11ef5c2ee7_b_d.jpg"
-          class="bg-dark">
-          <h1>Steps</h1>
-          <aside class="credit">
-            http://www.flickr.com/photos/60364452@N00/504844510
-          </aside>
-
-          <aside class="notes">
-            <p>Steps are the generic code that executes the test</p>
-          </aside>
+        <section>
+          <h2>Rendering your first response</h2>
         </section>
 
         <section data-background="#3F3F3F">
           <pre><code data-trim>
-from lettuce import step, world
+#!/usr/bin/env python
 
-@step(r'I get the resource "([^"]*)"')
-def get_resource(step, url):
-    """
-    Make a GET request to the given URL
-    """
+from flask import Flask
 
-    world.response = world.client.get(url)
+
+app = Flask(__name__)
+
+if __name__ == '__main__':
+    app.run(debug=True)
           </code></pre>
-        </section>
-
-        <section
-          data-background="http://farm4.staticflickr.com/3456/3201514924_fce1d1b640_b_d.jpg"
-          class="bg-dark">
-          <h1>Steps are stateful</h1>
-
-          <aside class="credit">
-            http://www.flickr.com/photos/chrisconnell/3201514924/
-          </aside>
         </section>
 
         <section data-background="#3F3F3F">
           <pre><code data-trim>
-from django.test.client import Client
-from lettuce import before, step, world
-from nose.tools import assert_equals
+#!/usr/bin/env python
 
-@before.each_scenario
-def set_default_client(scenario):
+from flask import Flask
 
-    world.client = Client()
 
-@step(r'I get the resource "([^"]*)"')
-def get_resource(step, url):
+app = Flask(__name__)
 
-    world.response = world.client.get(url)
+@app.route('/')
+def index():
+    """Homepage"""
 
-@step(r'I get the response code (\d+)')
-def check_response_code(step, code):
+    return "Hello, linux.conf.au"
 
-    code = int(code)
-    assert_equals(world.response.status_code, code)
+
+if __name__ == '__main__':
+    app.run(debug=True)
           </code></pre>
         </section>
 
         <section>
-          <h2>./manage.py harvest</h2>
-
-          <aside class="notes">
-            <p>Entry point for running lettuce test from Django</p>
-            <p>Will create a test server and *optionally* create a test
-            database</p>
-            <p>Also uses TEST_RUNNER</p>
-          </aside>
+          <pre>
+$ . python_env/bin/activate
+$ git checkout example-01
+$ pip install -r requirements.txt
+$ python webapp/__init__.py
+          </pre>
         </section>
 
         <section data-background="#3F3F3F">
           <pre><code data-trim>
-# settings.py
+from flask import redirect, render_template
 
-INSTALLED_APPS = (
-    ...
-    'lettuce.django',
-    'myapp',
-)
 
-LETTUCE_APPS = (
-    'myapp',
-)
+@app.route('/a-redirect')
+def a_redirect():
+    """Redirect the user"""
 
-LETTUCE_USE_TEST_DATABASE = True
+    return redirect(SOME_URL)
+
+
+@app.route('/a-template')
+def a_template():
+    """Render a page using a Jinga2 template"""
+
+    return render_template('template.html')
           </code></pre>
-      </section>
+        </section>
 
-      <section
-        data-background="http://farm3.staticflickr.com/2424/3599012763_eddf0fd56c_b_d.jpg"
-        class="bg-dark">
-        <h1>Selenium</h1>
-        <aside class="credit">
-          http://www.flickr.com/photos/21663307@N02/3599012763
-        </aside>
+        <section>
+          <h3>By default: templates are located in the module's
+            <tt>templates/</tt> directory:</h3>
+          <ul>
+            <li>webapp/</li>
+            <ul>
+              <li>__init__.py</li>
+              <li>templates/</li>
+              <ul>
+                <li>template.html</li>
+              </ul>
+            </ul>
+          </ul>
+        </section>
 
-        <aside class="notes">
-          <p>Lettuce webdriver</p>
-        </aside>
-      </section>
+        <section>
+          <pre>
+$ git checkout example-02
+$ pip install -r requirements.txt
+$ python webapp/__init__.py
+          </pre>
+        </section>
 
-      <section data-background="#3F3F3F">
-        <pre><code data-trim>
-from lettuce import before, world
-# import external lettuce steps
-import lettuce_webdriver.webdriver
+        <section>
+          <h2>handling query strings</h2>
+        </section>
 
-@before.all
-def set_browser():
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask import request
+
+
+@app.route('/')
+def index():
+    """Return the name query argument"""
+
+    return request.args['name']
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>or doing it RESTfully</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+@app.route('/item/&lt;int:pk&gt;')
+def get_item(pk):
+    """Return the item referred to by pk"""
+
+    # ...
+          </code></pre>
+        </section>
+
+        <section>
+          <p>
+            ?ou=Linux+Australia&amp;ou=linux.conf.au
+          </p>
+          <pre class="fragment fade-in expand" data-fragment-index="2">
+request.args['ou'] == 'Linux Australia'
+request.args.getlist('ou') ==
+    ['Linux Australia', 'linux.conf.au']
+          </pre>
+          <pre class="fragment fade-in expand" data-fragment-index="3">
+request.args['not present'] raises KeyError
+request.args.getlist('not present') == []
+          </pre>
+        </section>
+
+        <section>
+          <h2>handling forms and POST data</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask import request
+
+
+@app.route('/')
+def index():
+    """Return the name POST value"""
+
+    return request.form['name']
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>or better still use a forms library</h2>
+          <pre>
+            pip install Flask-WTF
+          </pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim style="font-size:18pt;">
+from flask import Flask, render_template
+from flask.ext.wtf import Form
+
+from wtforms import TextField
+
+
+class RegoForm(Form):
+    """A simple rego form"""
+
+    email = TextField('Email')
+
+
+@app.route('/register', methods=('GET', 'POST'))
+def get_register():
+    """Handle the registration form"""
+
+    form = RegoForm()
+
+    if form.validate_on_submit():
+        return "Success"
+
+    return render_template('template.html', form=form)
+
+if __name__ == '__main__':
+    app.secret_key = 'THIS IS REALLY SECRET'
+    app.run(debug=True)
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask.ext.wtf import Form
+
+from wtforms import TextField, validators
+
+
+class RegoForm(Form):
+    """A simple rego form"""
+
+    email = TextField('Email'
+                      validators=(validators.DataRequired(),
+                                  validators.Email()))
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+<form method="post">
+  {{ form.hidden_tag() }} {# for CSRF.. important! #}
+  {{ form.email.label }}
+  {{ form.email }}
+  {% if form.email.errors %}
+    <ul>
+      {% for error in form.email.errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  <input type="submit"/>
+</form>
+          </code></pre>
+          <aside class="notes">
+            This is example 3
+          </aside>
+        </section>
+
+        <section>
+          <h2>SQL alchemy</h2>
+          <pre>
+            pip install Flask-SQLAlchemy
+          </pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask.ext.sqlalchemy import SQLAlchemy
+
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    """A user in my database"""
+
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+
+    # ...
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+if __name__ == "__main__":
+    app.config['SQLALCHEMY_DATABASE_URI'] = \
+        'postgresql://username:password@localhost/myapp'
+    app.run(debug=True)
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+user = db.session.query(User)\
+    .filter(User.user_id == user_id)\
+    .one()
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>+ migrations</h2>
+          <h3>(with Alembic)</h3>
+          <pre>
+            pip install Flask-Migrate
+          </pre>
+        </section>
+
+        <section>
+          <h3>Detour:</h3>
+          <h2>Flask-Script</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask import Flask
+from flask.ext.script import Manager
+
+
+app = Flask(__name__)
+manager = Manager(app)
+
+
+if __name__ == '__main__':
+    manager.run()
+          </code></pre>
+        </section>
+
+        <section>
+          <pre style="font-size:14pt;">
+$ python __init__.py
+usage: __init__.py [-h] {shell,runserver} ...
+
+positional arguments:
+  {shell,runserver}
+    shell            Runs a Python shell inside Flask application context.
+    runserver        Runs the Flask development server i.e. app.run()
+
+optional arguments:
+  -h, --help         show this help message and exit
+
+$ python __init__.py runserver
+ * Running on http://127.0.0.1:5000/
+ * Restarting with reloader
+          </pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask import Flask
+from flask.ext.migrate import Migrate, MigrateCommand
+from flask.ext.script import Manager
+from flask.ext.sqlalchemy import SQLAlchemy
+
+
+app = Flask(__name__)
+
+manager = Manager(app)
+
+db = SQLAlchemy(app)
+
+migrate = Migrate(app, db)
+manager.add_command('db', MigrateCommand)
+          </code></pre>
+        </section>
+
+        <section>
+          <pre>
+$ python webapp/__init__.py db init
+$ git add migrations
+          </pre>
+        </section>
+
+        <section>
+          <pre>
+$ python webapp/__init__.py db migrate
+$ git add migrations/versions
+$ python webapp/__init__.py db upgrade
+          </pre>
+        </section>
+
+        <section>
+          <h3>Tie it all together so far:</h3>
+          <h2>Models and Forms</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask.ext.wtf import Form
+
+from wtforms.ext.sqlalchemy.orm import model_form
+
+
+class User(db.Model):
+    """A user"""
+
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(256), unique=True)
+
+UserForm = model_form(User, base_class=Form)
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code style="font-size:18pt;" data-trim>
+from flask.ext.wtf import Form
+
+from wtforms import validators
+from wtforms.ext.sqlalchemy.orm import model_form
+
+
+UserForm = model_form(User, base_class=Form, field_args={
+    'email': {
+        'validators': [validators.Email()],
+    },
+})
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code style="font-size:18pt;" data-trim>
+from flask import Flask, request, render_template, redirect, url_for
+
+
+@app.route('/register', methods=('GET', 'POST'))
+def register():
+    """Register a new user"""
+
+    obj = User()
+    form = UserForm(request.form, obj)
+
+    if form.validate_on_submit():
+        form.populate_obj(obj)
+        db.session.add(obj)
+        db.session.commit()
+
+        return redirect(url_for('register'))
+
+    return render_template('template.html',
+                           form=form,
+                           users=User.query.all())
+
+          </code></pre>
+          <aside class="notes">
+            This is example 4
+          </aside>
+        </section>
+
+        <section>
+          <h2>Emitting events</h2>
+          <h3>(and other streams)</h3>
+        </section>
+
+        <section>
+          <h3>Detour:</h3>
+          <h2>Generators</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+def fibonacci():
+    """Generate an infinite Fibonacci sequence"""
+    a = 0
+    b = 1
+
+    while True:
+        yield b
+        c = a + b
+        a = b
+        b = c
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+for i in fibonacci():
+    print i
+
+    # WARNING: will never end!
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+def fibonacci(n=10):
+    """Generate an n elements of the Fibonacci sequence"""
+    a = 0
+    b = 1
+
+    for i in xrange(n):
+        yield b
+        c = a + b
+        a = b
+        b = c
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+for i in fibonacci():
+    print i
+          </code></pre>
+
+          <pre>
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+          </pre>
+        </section>
+
+        <section>
+          <h2>We can use a generator to emit the response!</h2>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask import Response, stream_with_context
+
+
+@app.route('/events/stream')
+def get_events():
+    """Return a stream of events"""
+
+    @stream_with_context
+    def generate():
+        """
+        A generator that returns a single JSON-encoded
+        event, followed by an empty line.
+        """
+
+        while True:
+            yield get_event()
+
+    return Response(generate(),
+                    mimetype='text/event-stream')
+          </code></pre>
+        </section>
+
+        <section>
+          <pre>
+$ git checkout example-05
+$ pip install -r requirements.txt
+$ python webapp/__init__.py runserver \
+    --threaded
+          </pre>
+        </section>
+
+        <section>
+          <h2>But wait!</h2>
+        </section>
+
+        <section>
+          <p>
+            Flask will gracefully finish requests.
+          </p>
+          <p>
+            One request will never finish.
+          </p>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from flask.ext.script import (Manager,
+                              Server as ServerCommand)
+
+class Server(ServerCommand):
+    def handle(self, *args, **kwargs):
+        app.running = True
+
+        super(Server, self).handle(*args, **kwargs)
+
+        print "Shutting down"
+        app.running = False
+
+manager.add_command('runserver', Server)
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <pre><code data-trim>
+from Queue import Queue
+
+queue = Queue()
+
+@stream_with_context
+def generate():
     """
-    Create a browser instance for use in tests.
+    Yield JSON-encoded events
     """
 
-    world.browser = webdriver.PhantomJS(...)
-    world.browser.set_window_size(1200, 800)
-        </code></pre>
+    while app.running:
+        try:
+            item = queue.get(timeout=1)
 
-        <aside class="notes">
-          <p>We create the browser webdriver much like we created the
-          client</p>
-          <p>lettuce.webdriver looks for something called world.browser</p>
-        </aside>
-      </section>
+            yield format_messages([item])
+            queue.task_done()  # eat the queue item
+        except Empty:
+            pass
+          </code></pre>
+        </section>
 
-      <section data-background="#3F3F3F">
-        <pre><code data-trim>
-def site_url(url):
+        <section>
+          <h2>the other side</h2>
+          <p><b>warning:</b> javascript ahead</p>
+          <!-- FIXME -->
+        </section>
 
-    base_url = 'http://%s' % socket.gethostname()
+        <section>
+          <pre>
+$ git checkout example-06
+$ pip install -r requirements.txt
+$ bower install  # N.B. http://bower.io/
+$ python webapp/__init__.py collectstatic
+          </pre>
+        </section>
 
-    if server.port is not 80:
-        base_url += ':%d' % server.port
+        <section data-background="#3F3F3F">
+          <pre><code style="font-size:16pt;" data-trim>
+<html>
+  <title>Event Stream</title>
+  <body>
+    <ul id="messages">
+      {% for message in get_flashed_messages() %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
 
-    return urlparse.urljoin(base_url, url)
+<script src="/static/bower/jquery.js" type="text/javascript"></script>
+<script src="/static/bower/jquery.eventsource.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+    $.eventsource({
+      label: 'connect',
+      dataType: 'json',
+      url: '/events/stream',
+      message: function(data) {
+          $.each(data, function() {
+              $('<li>', { text: this }).appendTo('#messages');
+          });
+      }
+    })
+});
+</script>
+          </code></pre>
+        </section>
 
-@step("I visit the site")
-def open_site(step):
-
-    step.given('I visit "%s"' % site_url('/'))
-        </code></pre>
-
-        <aside class="notes">
-          <p>Django's test client knows how to connect to the test server</p>
-          <p>here we need something a little extra</p>
-          <p>Lettuce actually provides a site_url() method, but here I'm
-          replacing it to allow the webdriver to run on a different host</p>
-        </aside>
-      </section>
-
-      <section data-background="#3F3F3F">
-        <pre><code data-trim class="gherkin_en">
-  Scenario: Add consumer with blank Contact name
-    When I log in to admin with username "admin" and password "secret"
-    And I click "Consumers"
-    And I click "Add consumer"
-    And I fill in "Organisation" with "OOOO"
-    And I fill in "Contact name" with ""
-    And I fill in "Contact number" with "0399999999"
-    And I fill in "Website" with "www.test.com"
-    And I press "Save"
-
-    Then I should see "This field is required"
-    And there should be 0 consumers in the database
-        </code></pre>
-
-        <aside class="notes">
+        <section>
           <p>
-          Here's an example of filling out a form. Everything but the first
-          step is built into lettuce or L-W-D
+            If you're into websockets you can look at
+            github.com/kennethreitz/flask-sockets
+          </p>
+        </section>
+
+        <section>
+          <h1>Testing with py.test</h1>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <h3>tests/conftest.py</h3>
+          <pre><code style="font-size:16pt;" data-trim>
+import pytest
+
+from webapp import (app as flask_app,
+                    db as flask_db)
+
+
+@pytest.fixture(scope='session')
+def db():
+    """Set up the database"""
+
+    flask_app.config['TESTING'] = True
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = ...
+
+    flask_db.drop_all()
+    flask_db.create_all()
+
+    return flask_db
+
+
+@pytest.fixture(scope='session')
+def app(db):
+    """Set up the Flask test client"""
+
+    return flask_app.test_client()
+          </code></pre>
+        </section>
+
+        <section data-background="#3F3F3F">
+          <h3>tests/test_views.py</h3>
+          <pre><code data-trim>
+"""
+app and db are available in the test scope
+"""
+
+def test_index(app):
+    """Test I can get the index page"""
+
+    rv = app.get('/')
+
+    print rv.data
+
+    assert '&lt;title&gt;' in rv.data
+          </code></pre>
+        </section>
+
+        <section>
+          <pre>
+$ git checkout example-07
+$ pip install -r requirements.txt
+$ py.test tests/
+          </pre>
+        </section>
+
+        <!--section data-background="#3F3F3F">
+          <h2>with mocks</h2>
+          <pre><code style="font-size:16pt;" data-trim>
+import pytest
+
+from webapp import app as flask_app
+
+
+@pytest.fixture
+def oauth(monkeypatch):
+    """An OAuth monkeypatch"""
+
+    flask_app.route('/authorize')
+    def mock_authorize():
+        """Skip the OAuth step"""
+
+        # FIXME: set the token
+
+        return redirect(request.args['redirect_uri'])
+
+
+def test_oauth_finale(app, oauth):
+    # FIXME
+    pass
+          </code></pre>
+        </section-->
+
+        <section>
+          <h2>deploying to OpenShift</h2>
+        </section>
+
+        <section>
+          <p>
+            To deploy OpenShift runs your top-level setup.py
           </p>
           <p>
-          The last step actually makes this a good time to talk about...
+            To serve requests OpenShift runs
+            <tt>wsgi.application.application</tt>
           </p>
-        </aside>
-      </section>
-
-      <section>
-        <h1>Fixtures</h1>
-      </section>
-
-      <section data-background="#3F3F3F">
-       <pre><code data-trim class="gherkin_en">
-Feature: Create new API key
-
-  As an administrator
-  I want to create a new API key
-  So that I can enable others to query API
-
-  Background:
-    Given I have users in the database:
-      | username | password | is_superuser |
-      | admin    | secret   | true         |
-        </code></pre>
-      </section>
-
-      <section data-background="#3F3F3F">
-        <h2>Built in steps using Django's model introspection</h2>
-        <pre class="fragment fade-in" data-fragment-index="2"><code data-trim>
-Given I have users in the database:
-  ...
-        </code></pre>
-        <pre class="fragment fade-in" data-fragment-index="3"><code data-trim>
-Then there should be 1 consumer in the database
-        </code></pre>
-        <pre class="fragment fade-in" data-fragment-index="4"><code data-trim>
-And consumer should be present in the database:
-  ...
-        </code></pre>
-
-        <aside class="notes">
           <p>
-            Contributed these steps to lettuce.django, simplifies model
-            creation and inspection
+            www.openshift.com/developers/python
           </p>
-        </aside>
-      </section>
+        </section>
 
-      <section data-background="#3F3F3F">
-        <h3>Which are extendable</h3>
-        <pre><code data-trim>
-@creates_models(User)
-def create_user(step):
-    data = hashes_data(step)
-    for hash_ in data:
-        is_superuser = hash_.pop('is_superuser', False)
+        <section data-background="#3F3F3F">
+          <h3>setup.py</h3>
+          <pre><code style="font-size:16pt;" data-trim>
+import os
 
-        if is_superuser:
-            user = User.objects.create_superuser(**hash_)
-        else:
-            user = User.objects.create_user(**hash_)
+from setuptools import setup, find_packages
 
-        user.save()
+PROJECT_ROOT = os.environ.get('OPENSHIFT_REPO_DIR',
+                              os.path.dirname(os.path.abspath(__file__)))
 
-    reset_sequence(User)
-        </code></pre>
-      </section>
+with open(os.path.join(PROJECT_ROOT, 'requirements.txt')) as file_:
+    requirements = [req.strip() for req in file_.xreadlines()]
 
-      <section>
-        <h1>Best practice</h1>
-      </section>
+setup(name='example',
+      version='0.0',
+      author='Danielle Madeley',
+      author_email='danielle@madeley.id.au',
+      url='https://github.com/danni/linux-conf-au-flask-tute',
+      description='Example deploy to OpenShift',
+      install_requires=requirements,
+      )
+          </code></pre>
+        </section>
 
-      <section>
-        <img src="http://i.imgur.com/cEOO46R.jpg"/>
+        <section data-background="#3F3F3F">
+          <h3>wsgi/application.py</h3>
+          <pre><code style="font-size:16pt;" data-trim>
+import os
+import sys
 
-        <aside class="notes">
-          <p>Don't be too high level, complex steps will require their own
-          tests</p>
-          <p>e.g. this is bad</p>
-        </aside>
-      </section>
+# add local code
+sys.path.append(os.path.join(os.environ['OPENSHIFT_REPO_DIR']))
 
-      <section data-background="#3F3F3F">
-        <pre><code data-trim class="gherkin_en">
-Given I have items in my cart
+# initialise virtual environment
+virtenv = os.environ['OPENSHIFT_HOMEDIR'] + 'python-2.7/virtenv/'
+os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.7/site-packages')
 
-When I go to checkout
-And I pay for the items
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 
-Then everything worked
-        </code></pre>
+try:
+    execfile(virtualenv, dict(__file__=virtualenv))
+except IOError:
+    pass
 
-        <aside class="notes">
-          <p>Similarly -- too low level -- you'll tie your test closely to
-          your implementation</p>
-          <p>These are integration tests, but remember your test hygiene</p>
-        </aside>
-      </section>
+# import and configure WSGI application
+from webapp import app as application
+          </code></pre>
+        </section>
 
-      <section>
-        <h2>write reusable steps</h2>
+        <section data-background="#3F3F3F">
+          <pre><code style="font-size:16pt;" data-trim>
+app = Flask(__name__)
 
-        <aside class="notes">
-          <p>Parameterise where possible</p>
-          <p>You can have steps call other steps, but this can lead to an
-          unmaintainable mess. Consider factoring out the common code.</p>
-        </aside>
-      </section>
+app.secret_key = os.environ.get('OPENSHIFT_SECRET_TOKEN',
+                                'THIS IS REALLY SECRET')
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    os.environ.get('OPENSHIFT_POSTGRESQL_DB_URL',
+                   'sqlite:///../app.db')
 
-      <section data-background="#3F3F3F">
-        <h3>write reusable scenarios</h3>
-        <pre><code data-trim style="font-size: 20pt;" class="gherkin_en">
-Scenario Outline: I edit a user to add a team
-    Given users have permissions:
-        | user         | organisation | permission        |
-        | peon@org.org | OrgCorp      | organisation_user |
-    And I log in with email "&lt;email&gt;" through the profile server
+try:
+    app.static_folder = os.path.join(os.environ['OPENSHIFT_REPO_DIR'], 'wsgi')
+except KeyError:
+    pass
+          </code></pre>
+        </section>
 
-    When I visit site page "organisation/1/admin/user/4/edit"
-    And I select option "Team 1" from selector "Team"
-    And I press "Save"
+        <section>
+          <p>
+            (assuming you've set up Openshift)
+          </p>
+          <pre style="font-size:18pt;">
+$ rhc app create example python-2.7 --no-git
+$ git remote add rhc ssh://...@example-.../~/git/example.git/
 
-    Then there should be 1 organisation member metadata in the database
-    Then organisation member metadata should be present in the database:
-        | organisation__name | user__email  | team   |
-        | OrgCorp            | peon@org.org | Team 1 |
+$ rhc cartridge add -c postgresql-9.2 -a example
 
-    Examples:
-        | email             |
-        | god@god.org       |
-        | superuser@org.org |
-        | poweruser@org.org |
-        </code></pre>
-      </section>
-
-      <section>
-        <h2>tie each feature file to a single story</h2>
-
-        <aside class="notes">
-          <p>Write the story in the top of the feature</p>
-          <p>Also the ticket number?</p>
-          <p>You should be able to get the feature name from the ticket
-          name</p>
-        </aside>
-      </section>
-
-      <section>
-        <h2>include scenarios and anti-scenarios</h2>
-
-        <aside class="notes">
-          <p>Make a product owner reviewing the tests part of UAT</p>
-        </aside>
-      </section>
-
-      <section
-        data-background="http://farm4.staticflickr.com/3161/3050378171_f944bc8c4a_b_d.jpg">
-        <h1>Other uses</h1>
-        <aside class="credit">
-          http://www.flickr.com/photos/omcoc/3050378171/
-        </aside>
-
-        <aside class="notes">
-          Use it as part of your docs toolchain, e.g. include it inside
-          a Restructured text block to generate steps and screenshots
-        </aside>
-      </section>
-
-      <section
-        data-background="http://farm4.staticflickr.com/3494/3763640652_c01592c5d8_b_d.jpg">
-        <h1>fin ;-P</h1>
-        <h3>questions?</h3>
-
-        <div class="white breakout"><p><small>
-          <em>colophon</em>
-          This presentation was done in reveal.js using
-          Junction, Cantarell and Source Code Pro with photography from
-          the Creative Commons.
-        </small></p>
-        <p><small><img
-          src="http://blogs.gnome.org/danni/files/2013/05/Infoxchange_logo.jpg"/>
-          Infoxchange is hiring. Come and chat to me!
-        </small></p></div>
-        <p>
-          <i class="icon-globe"></i> blogs.gnome.org/danni
-          <i class="icon-twitter"></i> dannipenguin
-        </p>
-
-        <aside class="credit">
-          http://www.flickr.com/photos/mau3ry/3763640652/
-        </aside>
-      </section>
+$ git push rhc --force example-08:master
+          </pre>
+        </section>
 
 			</div>
 
